@@ -1,12 +1,22 @@
 import React from 'react';
 import { scaleLinear } from 'd3-scale';
+import range from 'lodash/range';
 
 import TimeAxis from './TimeAxis';
 import TimelineGrid from './TimelineGrid';
 import TimelineRow from './TimelineRow';
+import TimelineDate from './TimelineDate';
 
 import { Timeline } from 'timelineEvent';
-import { axisHeight, bottomPadding, dateWidth, leftPadding, rightPadding, topPadding } from './constants';
+import {
+  axisHeight,
+  bottomPadding,
+  dateColumnWidth,
+  leftPadding,
+  rightPadding,
+  rowHeight,
+  topPadding
+} from './constants';
 import { getRowOffset, getViewHeight } from './layoutHelpers';
 
 import './TimelineChart.css';
@@ -22,30 +32,42 @@ function TimelineChart(props: Props) {
     data = [],
   } = props;
 
-  const viewX = leftPadding + dateWidth;
+  const viewX = leftPadding;
   const viewY = topPadding;
   const viewWidth = width - viewX - rightPadding;
   const viewHeight = getViewHeight(data.length);
+  const timelineWidth = viewWidth - dateColumnWidth;
 
-  const xScale = scaleLinear().domain([0, 24]).range([0, viewWidth]);
-  const ticks = getTicksForWidth(width);
+  const xScale = scaleLinear().domain([0, 24]).range([0, timelineWidth]);
+  const ticks = getTicksForWidth(timelineWidth);
 
   const height = viewHeight + bottomPadding + topPadding;
 
   return (
     <svg className="timeline-chart" width={width} height={height}>
       <g className="timeline-chart__view" transform={`translate(${viewX}, ${viewY})`}>
-        <TimelineGrid scale={xScale} ticks={ticks} rowsCount={data.length} />
-        <TimeAxis scale={xScale}  ticks={ticks} height={axisHeight}/>
-        { data.map((d, row) => {
-          const rowOffset = getRowOffset(row);
+        <g className="timeline-chart__rows" transform={`translate(0, ${axisHeight})`}>
+          <g key="grid" transform={`translate(${dateColumnWidth} 0)`}>
+            <TimelineGrid scale={xScale} ticks={ticks} rowsCount={data.length} />
+          </g>
+          { data.map((timeline, row) => {
+            const rowOffset = getRowOffset(row);
 
-          return (
-            <g key={row} transform={`translate(0 ${rowOffset})`}>
-              <TimelineRow width={viewWidth} timeline={d} />
-            </g>
-          )
-        })}
+            return (
+              <React.Fragment key={row}>
+                <g key="date" transform={`translate(0 ${rowOffset})`}>
+                  <TimelineDate width={dateColumnWidth} height={rowHeight} date={timeline.date} />
+                </g>
+                <g key="timeline" transform={`translate(${dateColumnWidth} ${rowOffset})`}>
+                  <TimelineRow width={timelineWidth} timeline={timeline} />
+                </g>
+              </React.Fragment>
+            );
+          })}
+        </g>
+        <g key="time-axis" transform={`translate(${dateColumnWidth} 0)`}>
+          <TimeAxis scale={xScale}  ticks={ticks} height={axisHeight}/>
+        </g>
       </g>
     </svg>
   );

@@ -1,4 +1,4 @@
-export const dateWidth = 100;
+export const dateColumnWidth = 100;
 export const rowHeight = 40;
 export const axisHeight = 40;
 export const rightPadding = 5;

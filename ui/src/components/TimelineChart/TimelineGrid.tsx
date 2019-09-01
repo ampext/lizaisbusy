@@ -21,7 +21,7 @@ function TimelineGrid(props: Props) {
   } = props;
 
   return (
-    <g className="timeline-grid">
+    <React.Fragment>
       { range(rowsCount).map(row => {
         const rowOffset = getRowOffset(row);
         const width = scale(24);
@@ -47,7 +47,7 @@ function TimelineGrid(props: Props) {
           />
         )
       })}
-    </g>
+    </React.Fragment>
   );
 }
 
