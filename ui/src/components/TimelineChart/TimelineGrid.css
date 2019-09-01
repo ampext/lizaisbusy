@@ -9,11 +9,14 @@
   fill: #fffbb1;
 }
 
-.timeline-grid__separator, .timeline-grid__grid {
+.timeline-grid__separator {
   stroke: lightgray;
 }
 
-.timeline-grid__grid {
-  stroke: none;
+.timeline-grid__zero {
+  stroke: lightgray;
 }
 
+.timeline-grid__start, .timeline-grid__end {
+  stroke: darkgray;
+}

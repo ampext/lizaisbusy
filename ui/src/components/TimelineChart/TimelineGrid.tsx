@@ -1,30 +1,31 @@
 import React from 'react';
-import { ScaleLinear } from 'd3-scale';
 import range from 'lodash/range';
 
-import { axisHeight, rowHeight } from './constants';
-import { getViewHeight, getRowOffset } from './layoutHelpers';
+import { getRowOffset, getRowsTotalHeight } from './layoutHelpers';
 
 import './TimelineGrid.css';
 
 interface Props {
   rowsCount: number,
-  scale: ScaleLinear<number, number>,
-  ticks: Array<number>,
+  rowHeight: number,
+  width: number,
+  startOffset?: number
 }
 
 function TimelineGrid(props: Props) {
   const {
     rowsCount,
-    scale,
-    ticks,
+    rowHeight,
+    width,
+    startOffset = 0,
   } = props;
+
+  const startX = startOffset + 0.5;
 
   return (
     <React.Fragment>
       { range(rowsCount).map(row => {
         const rowOffset = getRowOffset(row);
-        const width = scale(24);
 
         return (
           <g key={`row-${row}`} className="timeline-grid__row" transform={`translate(0 ${rowOffset})`}>
@@ -36,17 +37,22 @@ function TimelineGrid(props: Props) {
           </g>
         );
       })}
-      { ticks.map(t => {
-        const x = Math.round(scale(t)) + 0.5;
-
-        return (
-          <line
-            key={`grid-${t}`} className="timeline-grid__grid"
-            x1={x} y1={axisHeight} x2={x} y2={getViewHeight(rowsCount)}
-            strokeDasharray="4 4"
-          />
-        )
-      })}
+      <line
+        className="timeline-grid__separator"
+        x1={0} y1={0.5} x2={width} y2={0.5}
+      />
+      <line
+        key="zero" className="timeline-grid__zero"
+        x1={0.5} y1={0} x2={0.5} y2={getRowsTotalHeight(rowsCount)}
+      />
+      <line
+        key="start" className="timeline-grid__start"
+        x1={startX} y1={0} x2={startX} y2={getRowsTotalHeight(rowsCount)}
+      />
+      <line
+        key="end" className="timeline-grid__end"
+        x1={width + 0.5} y1={0} x2={width + 0.5} y2={getRowsTotalHeight(rowsCount)}
+      />
     </React.Fragment>
   );
 }

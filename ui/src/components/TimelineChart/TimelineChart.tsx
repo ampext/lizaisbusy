@@ -17,7 +17,7 @@ import {
   rowHeight,
   topPadding
 } from './constants';
-import { getRowOffset, getViewHeight } from './layoutHelpers';
+import { getRowOffset, getRowsTotalHeight } from './layoutHelpers';
 
 import './TimelineChart.css';
 
@@ -35,7 +35,7 @@ function TimelineChart(props: Props) {
   const viewX = leftPadding;
   const viewY = topPadding;
   const viewWidth = width - viewX - rightPadding;
-  const viewHeight = getViewHeight(data.length);
+  const viewHeight = axisHeight + getRowsTotalHeight(data.length);
   const timelineWidth = viewWidth - dateColumnWidth;
 
   const xScale = scaleLinear().domain([0, 24]).range([0, timelineWidth]);
@@ -47,9 +47,7 @@ function TimelineChart(props: Props) {
     <svg className="timeline-chart" width={width} height={height}>
       <g className="timeline-chart__view" transform={`translate(${viewX}, ${viewY})`}>
         <g className="timeline-chart__rows" transform={`translate(0, ${axisHeight})`}>
-          <g key="grid" transform={`translate(${dateColumnWidth} 0)`}>
-            <TimelineGrid scale={xScale} ticks={ticks} rowsCount={data.length} />
-          </g>
+          <TimelineGrid rowsCount={data.length} width={viewWidth} rowHeight={rowHeight} startOffset={dateColumnWidth} />
           { data.map((timeline, row) => {
             const rowOffset = getRowOffset(row);
 
