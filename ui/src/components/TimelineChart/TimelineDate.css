@@ -3,5 +3,5 @@
 }
 
 .timeline-date__label {
-  fill: dimgrey;
+  fill: var(--label-color);
 }

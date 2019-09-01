@@ -3,5 +3,5 @@
 }
 
 .timeline-row__event {
-  fill: sandybrown;
+  fill: var(--event-color);
 }

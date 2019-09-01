@@ -1,11 +1,10 @@
 .time-axis {
-  stroke: darkgray;
 }
 
 .time-axis__tick {
-  stroke: darkgray;
+  stroke: var(--axis-tick-color);
 }
 
 .time-axis__label {
-  fill: dimgrey;
+  fill: var(--axis-color);
 }

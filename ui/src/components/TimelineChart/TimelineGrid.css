@@ -2,19 +2,19 @@
 }
 
 .timeline-grid__row {
-  fill: #ffffff;
+  fill: var(--row-background-color);
 }
 
 .timeline-grid__row:nth-child(even) {
-  fill: #fffbb1;
+  fill: var(--row-background-alt-color);
 }
 
 .timeline-grid__separator {
-  stroke: lightgray;
+  stroke: var(--grid-color);
 }
 
 .timeline-grid__zero {
-  stroke: lightgray;
+  stroke: var(--grid-color);
 }
 
 .timeline-grid__start, .timeline-grid__end {

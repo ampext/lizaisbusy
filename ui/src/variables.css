@@ -1,0 +1,9 @@
+:root {
+  --event-color: sandybrown;
+  --grid-color: lightgray;
+  --axis-tick-color: lightgray;
+  --axis-color: dimgray;
+  --label-color: dimgray;
+  --row-background-color: white;
+  --row-background-alt-color: #fffbb1;
+}
