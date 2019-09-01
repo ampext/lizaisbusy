@@ -1,4 +1,5 @@
 .time-axis {
+  stroke: var(--axis-color);
 }
 
 .time-axis__tick {
@@ -6,5 +7,5 @@
 }
 
 .time-axis__label {
-  fill: var(--axis-color);
+  fill: var(--label-color);
 }
