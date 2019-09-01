@@ -1,0 +1,19 @@
+.timeline-grid {
+}
+
+.timeline-grid__row {
+  fill: #ffffff;
+}
+
+.timeline-grid__row:nth-child(even) {
+  fill: #fffbb1;
+}
+
+.timeline-grid__separator, .timeline-grid__grid {
+  stroke: lightgray;
+}
+
+.timeline-grid__grid {
+  stroke: none;
+}
+
