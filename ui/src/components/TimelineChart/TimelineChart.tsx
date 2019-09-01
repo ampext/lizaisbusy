@@ -57,7 +57,7 @@ function TimelineChart(props: Props) {
                   <TimelineDate width={dateColumnWidth} height={rowHeight} date={timeline.date} />
                 </g>
                 <g key="timeline" transform={`translate(${dateColumnWidth} ${rowOffset})`}>
-                  <TimelineRow width={timelineWidth} timeline={timeline} />
+                  <TimelineRow width={timelineWidth} rowHeight={rowHeight} timeline={timeline} />
                 </g>
               </React.Fragment>
             );

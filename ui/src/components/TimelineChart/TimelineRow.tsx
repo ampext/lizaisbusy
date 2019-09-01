@@ -3,13 +3,14 @@ import { scaleLinear } from 'd3-scale';
 
 import { Timeline } from 'timelineEvent';
 import { endOfDay, startOfDay } from '../../dateHelpers';
-import { eventPadding, rowHeight } from './constants';
+import { eventPadding } from './constants';
 
 import './TimelineRow.css';
 
 interface Props {
   timeline: Timeline,
   width: number,
+  rowHeight: number,
 }
 
 function TimelineRow(props: Props) {
@@ -19,6 +20,7 @@ function TimelineRow(props: Props) {
       events = [],
     },
     width,
+    rowHeight,
   } = props;
 
   const timeScale = scaleLinear().domain([startOfDay(date), endOfDay(date)]).range([0, width]);
@@ -32,14 +34,19 @@ function TimelineRow(props: Props) {
             endTime,
           } = event;
 
-          const x = timeScale(startTime);
-          const width = Math.max(2, timeScale(endTime) - x);
+          let x = timeScale(startTime);
+          const eventWidth = Math.round(Math.max(2, timeScale(endTime) - x));
+
+          // a hack to make events that close to 12:00 look better
+          if (x + eventWidth > width) {
+            x = width - eventWidth;
+          }
 
           return (
             <rect
               key={`event-${i}`}
               className="timeline-row__event"
-              x={Math.round(x)} y={eventPadding} width={Math.round(width)} height={rowHeight - 2 * eventPadding}
+              x={Math.round(x)} y={eventPadding} width={eventWidth} height={rowHeight - 2 * eventPadding}
             />
           )
       })}
