@@ -3,9 +3,10 @@ import { scaleLinear } from 'd3-scale';
 
 import { Timeline } from 'timelineEvent';
 import { endOfDay, startOfDay } from '../../dateHelpers';
-import { eventPadding } from './constants';
 
 import './TimelineRow.css';
+
+const eventPadding = 4;
 
 interface Props {
   timeline: Timeline,

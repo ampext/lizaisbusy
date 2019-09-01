@@ -1,6 +1,5 @@
 import React from 'react';
 import { scaleLinear } from 'd3-scale';
-import range from 'lodash/range';
 
 import TimeAxis from './TimeAxis';
 import TimelineGrid from './TimelineGrid';
@@ -8,18 +7,17 @@ import TimelineRow from './TimelineRow';
 import TimelineDate from './TimelineDate';
 
 import { Timeline } from 'timelineEvent';
-import {
-  axisHeight,
-  bottomPadding,
-  dateColumnWidth,
-  leftPadding,
-  rightPadding,
-  rowHeight,
-  topPadding
-} from './constants';
 import { getRowOffset, getRowsTotalHeight } from './layoutHelpers';
 
 import './TimelineChart.css';
+
+export const dateColumnWidth = 100;
+export const rowHeight = 40;
+export const axisHeight = 40;
+export const rightPadding = 5;
+export const leftPadding = 5;
+export const topPadding = 5;
+export const bottomPadding = 5;
 
 interface Props {
   width: number;
@@ -35,7 +33,7 @@ function TimelineChart(props: Props) {
   const viewX = leftPadding;
   const viewY = topPadding;
   const viewWidth = width - viewX - rightPadding;
-  const viewHeight = axisHeight + getRowsTotalHeight(data.length);
+  const viewHeight = axisHeight + getRowsTotalHeight(data.length, rowHeight);
   const timelineWidth = viewWidth - dateColumnWidth;
 
   const xScale = scaleLinear().domain([0, 24]).range([0, timelineWidth]);
@@ -49,7 +47,7 @@ function TimelineChart(props: Props) {
         <g className="timeline-chart__rows" transform={`translate(0, ${axisHeight})`}>
           <TimelineGrid rowsCount={data.length} width={viewWidth} rowHeight={rowHeight} startOffset={dateColumnWidth} />
           { data.map((timeline, row) => {
-            const rowOffset = getRowOffset(row);
+            const rowOffset = getRowOffset(row, rowHeight);
 
             return (
               <React.Fragment key={row}>

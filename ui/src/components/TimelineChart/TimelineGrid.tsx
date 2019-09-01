@@ -21,11 +21,12 @@ function TimelineGrid(props: Props) {
   } = props;
 
   const startX = startOffset + 0.5;
+  const height = getRowsTotalHeight(rowsCount, rowHeight);
 
   return (
     <React.Fragment>
       { range(rowsCount).map(row => {
-        const rowOffset = getRowOffset(row);
+        const rowOffset = getRowOffset(row, rowHeight);
 
         return (
           <g key={`row-${row}`} className="timeline-grid__row" transform={`translate(0 ${rowOffset})`}>
@@ -43,15 +44,15 @@ function TimelineGrid(props: Props) {
       />
       <line
         key="zero" className="timeline-grid__zero"
-        x1={0.5} y1={0} x2={0.5} y2={getRowsTotalHeight(rowsCount)}
+        x1={0.5} y1={0} x2={0.5} y2={height}
       />
       <line
         key="start" className="timeline-grid__start"
-        x1={startX} y1={0} x2={startX} y2={getRowsTotalHeight(rowsCount)}
+        x1={startX} y1={0} x2={startX} y2={height}
       />
       <line
         key="end" className="timeline-grid__end"
-        x1={width + 0.5} y1={0} x2={width + 0.5} y2={getRowsTotalHeight(rowsCount)}
+        x1={width + 0.5} y1={0} x2={width + 0.5} y2={height}
       />
     </React.Fragment>
   );
