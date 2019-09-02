@@ -1,11 +1,20 @@
 .time-axis {
-  stroke: var(--axis-color);
+  display: flex;
+  box-sizing: border-box;
+  border-bottom: 1px solid var(--axis-color);
 }
 
-.time-axis__tick {
-  stroke: var(--axis-tick-color);
+.time-axis__item {
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  flex-grow: 1;
+  padding-left: 5px;
+
+  border-left: 1px solid var(--axis-tick-color);
 }
 
 .time-axis__label {
-  fill: var(--label-color);
+  font-size: 10px;
+  color: var(--label-color);
 }

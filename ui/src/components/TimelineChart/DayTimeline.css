@@ -1,0 +1,3 @@
+.day-timeline__event {
+  fill: var(--event-color);
+}

@@ -1,7 +1,3 @@
 .timeline-date {
-
-}
-
-.timeline-date__label {
-  fill: var(--label-color);
+  color: var(--label-color);
 }

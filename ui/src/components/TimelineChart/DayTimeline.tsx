@@ -4,33 +4,30 @@ import { scaleLinear } from 'd3-scale';
 import { Timeline } from 'timelineEvent';
 import { endOfDay, startOfDay } from '../../dateHelpers';
 
-import './TimelineRow.css';
-
-const eventPadding = 4;
+import './DayTimeline.css';
 
 interface Props {
-  timeline: Timeline,
+  data: Timeline,
   width: number,
-  rowHeight: number,
+  height: number,
 }
 
-function TimelineRow(props: Props) {
+function DayTimeline(props: Props) {
   const {
-    timeline: {
+    data: {
       date,
-      events = [],
+      events,
     },
     width,
-    rowHeight,
+    height,
   } = props;
 
   const timeScale = scaleLinear().domain([startOfDay(date), endOfDay(date)]).range([0, width]);
 
   return (
-    <g className="timeline-row">
+    <svg width={width} height={height}>
       { events.map((event, i) => {
           const {
-            type,
             startTime,
             endTime,
           } = event;
@@ -45,14 +42,13 @@ function TimelineRow(props: Props) {
 
           return (
             <rect
-              key={`event-${i}`}
-              className="timeline-row__event"
-              x={Math.round(x)} y={eventPadding} width={eventWidth} height={rowHeight - 2 * eventPadding}
+              key={`event-${i}`} className="day-timeline__event"
+              x={Math.round(x)} y={0} width={eventWidth} height={height}
             />
           )
       })}
-    </g>
+    </svg>
   );
 }
 
-export default React.memo(TimelineRow);
+export default React.memo(DayTimeline);

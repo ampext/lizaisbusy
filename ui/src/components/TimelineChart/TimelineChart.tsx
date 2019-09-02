@@ -1,23 +1,17 @@
 import React from 'react';
 import { scaleLinear } from 'd3-scale';
 
-import TimeAxis from './TimeAxis';
-import TimelineGrid from './TimelineGrid';
-import TimelineRow from './TimelineRow';
 import TimelineDate from './TimelineDate';
+import DayTimeline from './DayTimeline';
+import TimeAxis from './TimeAxis';
 
 import { Timeline } from 'timelineEvent';
-import { getRowOffset, getRowsTotalHeight } from './layoutHelpers';
 
 import './TimelineChart.css';
 
 export const dateColumnWidth = 100;
-export const rowHeight = 40;
-export const axisHeight = 40;
-export const rightPadding = 5;
-export const leftPadding = 5;
-export const topPadding = 5;
-export const bottomPadding = 5;
+export const timelineHeight = 30;
+export const axisHeight = 20;
 
 interface Props {
   width: number;
@@ -30,43 +24,30 @@ function TimelineChart(props: Props) {
     data = [],
   } = props;
 
-  const viewX = leftPadding;
-  const viewY = topPadding;
-  const viewWidth = width - viewX - rightPadding;
-  const viewHeight = axisHeight + getRowsTotalHeight(data.length, rowHeight);
-  const timelineWidth = viewWidth - dateColumnWidth;
+  const timelineWidth = width - dateColumnWidth;
 
   const xScale = scaleLinear().domain([0, 24]).range([0, timelineWidth]);
   const ticks = getTicksForWidth(timelineWidth);
 
-  const height = viewHeight + bottomPadding + topPadding;
-
   return (
-    <svg className="timeline-chart" width={width} height={height}>
-      <g className="timeline-chart__view" transform={`translate(${viewX}, ${viewY})`}>
-        <g className="timeline-chart__rows" transform={`translate(0, ${axisHeight})`}>
-          <TimelineGrid rowsCount={data.length} width={viewWidth} rowHeight={rowHeight} startOffset={dateColumnWidth} />
-          { data.map((timeline, row) => {
-            const rowOffset = getRowOffset(row, rowHeight);
-
-            return (
-              <React.Fragment key={row}>
-                <g key="date" transform={`translate(0 ${rowOffset})`}>
-                  <TimelineDate width={dateColumnWidth} height={rowHeight} date={timeline.date} />
-                </g>
-                <g key="timeline" transform={`translate(${dateColumnWidth} ${rowOffset})`}>
-                  <TimelineRow width={timelineWidth} rowHeight={rowHeight} timeline={timeline} />
-                </g>
-              </React.Fragment>
-            );
-          })}
-        </g>
-        <g key="time-axis" transform={`translate(${dateColumnWidth} 0)`}>
-          <TimeAxis scale={xScale}  ticks={ticks} height={axisHeight}/>
-        </g>
-      </g>
-    </svg>
-  );
+    <div className="timeline-chart">
+      <div style={{ marginLeft: dateColumnWidth - 1 }}>
+        <TimeAxis ticks={ticks} height={axisHeight} />
+      </div>
+      { data.map((timeline: Timeline, row: number) => (
+          <div key={`row-${row}`} className="timeline-chart-row">
+            <div className="timeline-chart-row__date" style={{ width: dateColumnWidth }}>
+              <TimelineDate>
+                {timeline.date}
+              </TimelineDate>
+            </div>
+            <div className="timeline-chart-row__graph">
+              <DayTimeline width={timelineWidth} height={timelineHeight} data={timeline} />
+            </div>
+          </div>
+      ))}
+    </div>
+  )
 }
 
 function getTicksForWidth(width: number): Array<number> {
