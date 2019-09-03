@@ -1,9 +1,10 @@
 :root {
+  --background-color: white;
   --event-color: sandybrown;
   --grid-color: lightgray;
   --axis-tick-color: lightgray;
   --axis-color: darkgray;
   --label-color: dimgray;
-  --row-background-color: white;
-  --row-background-alt-color: #fffbb1;
+  --row-background-color: none;
+  --row-background-alt-color: #fffccc;
 }

@@ -4,6 +4,21 @@
   border: 1px solid var(--grid-color);
 }
 
+.timeline-chart__header {
+  display: flex;
+}
+
+.timeline-chart__corner {
+  box-sizing: border-box;
+  flex-shrink: 0;
+  border-right: 1px solid var(--grid-color);
+  border-bottom: 1px solid var(--grid-color);
+}
+
+.timeline-chart__time-axis {
+  flex-grow: 1;
+}
+
 .timeline-chart-row {
   display: flex;
   justify-content: stretch;
@@ -16,7 +31,7 @@
   border-bottom: 1px solid var(--grid-color);
 }
 
-.timeline-chart-row:nth-child(odd) {
+.timeline-chart-row:nth-child(even) {
   background-color: var(--row-background-alt-color);
 }
 

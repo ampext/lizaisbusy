@@ -31,21 +31,26 @@ function TimelineChart(props: Props) {
 
   return (
     <div className="timeline-chart">
-      <div style={{ marginLeft: dateColumnWidth - 1 }}>
-        <TimeAxis ticks={ticks} height={axisHeight} />
+      <div className="timeline-chart__header">
+        <div className="timeline-chart__corner" style={{ width: dateColumnWidth }} />
+        <div className="timeline-chart__time-axis">
+          <TimeAxis ticks={ticks} height={axisHeight} />
+        </div>
       </div>
-      { data.map((timeline: Timeline, row: number) => (
-          <div key={`row-${row}`} className="timeline-chart-row">
-            <div className="timeline-chart-row__date" style={{ width: dateColumnWidth }}>
-              <TimelineDate>
-                {timeline.date}
-              </TimelineDate>
+      <div className="timeline-chart__rows">
+        { data.map((timeline: Timeline, row: number) => (
+            <div key={`row-${row}`} className="timeline-chart-row">
+              <div className="timeline-chart-row__date" style={{ width: dateColumnWidth }}>
+                <TimelineDate>
+                  {timeline.date}
+                </TimelineDate>
+              </div>
+              <div className="timeline-chart-row__graph">
+                <DayTimeline width={timelineWidth} height={timelineHeight} data={timeline} />
+              </div>
             </div>
-            <div className="timeline-chart-row__graph">
-              <DayTimeline width={timelineWidth} height={timelineHeight} data={timeline} />
-            </div>
-          </div>
-      ))}
+        ))}
+      </div>
     </div>
   )
 }

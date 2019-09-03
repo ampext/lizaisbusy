@@ -6,25 +6,6 @@ import { Timeline } from '../timelineEvent';
 
 import './TimelineView.css';
 
-/*const data = [
-  {
-    date: new Date('2019-08-24'),
-    events: [{
-      startTime: new Date('2019-08-24T01:40:00'),
-      endTime: new Date('2019-08-24T01:45:00'),
-      type: TimelineEventType.Busy,
-    }, {
-      startTime: new Date('2019-08-24T16:03:00'),
-      endTime: new Date('2019-08-24T16:04:00'),
-      type: TimelineEventType.Busy,
-    }]
-  },
-  {
-    date: new Date('2019-08-25'),
-    events: [],
-  }
-];*/
-
 interface Props {
   data: ReadonlyArray<Timeline>,
 }
