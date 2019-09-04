@@ -24,9 +24,7 @@ function TimelineChart(props: Props) {
     data = [],
   } = props;
 
-  const timelineWidth = width - dateColumnWidth;
-
-  const xScale = scaleLinear().domain([0, 24]).range([0, timelineWidth]);
+  const timelineWidth = width - dateColumnWidth - 2 /* borders */;
   const ticks = getTicksForWidth(timelineWidth);
 
   return (

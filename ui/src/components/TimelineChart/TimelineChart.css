@@ -6,6 +6,7 @@
 
 .timeline-chart__header {
   display: flex;
+  background-color: var(--header-background-color);
 }
 
 .timeline-chart__corner {
