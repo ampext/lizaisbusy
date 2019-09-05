@@ -14,7 +14,7 @@ module.exports = {
 
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'App',
+      title: 'Liza is busy',
       template:  path.join(__dirname, 'public/index.html'),
     }),
     new webpack.DefinePlugin({
