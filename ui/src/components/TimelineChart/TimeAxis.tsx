@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './TimeAxis.css';
+import './TimeAxis.scss';
 
 interface Props {
   height: number;

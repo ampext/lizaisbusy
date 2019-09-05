@@ -1,0 +1,53 @@
+.timeline-chart {
+  display: inline-block;
+  box-sizing: content-box;
+  border: 1px solid var(--grid-color);
+
+  &__header {
+    display: flex;
+    background-color: var(--header-background-color);
+  }
+
+  &__corner {
+    box-sizing: border-box;
+    flex-shrink: 0;
+    border-right: 1px solid var(--grid-color);
+    border-bottom: 1px solid var(--grid-color);
+  }
+
+  &__time-axis {
+    flex-grow: 1;
+  }
+
+  &__graph {
+    flex-grow: 0;
+    padding: 5px 0;
+    line-height: 0;
+  }
+}
+
+.timeline-chart-row {
+  display: flex;
+  justify-content: stretch;
+  width: 100%;
+
+  background-color: var(--row-background-color);
+
+  &:not(:last-child) {
+    border-bottom: 1px solid var(--grid-color);
+  }
+
+  &:nth-child(even) {
+    background-color: var(--row-background-alt-color);
+  }
+
+  &__date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+    flex-shrink: 0;
+    border-right: 1px solid var(--grid-color);
+  }
+}

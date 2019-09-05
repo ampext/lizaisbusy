@@ -4,7 +4,7 @@ import { scaleLinear } from 'd3-scale';
 import { Timeline } from 'timelineEvent';
 import { endOfDay, startOfDay } from '../../dateHelpers';
 
-import './DayTimeline.css';
+import './DayTimeline.scss';
 
 interface Props {
   data: Timeline,

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './TimelineDate.css';
+import './TimelineDate.scss';
 
 interface Props {
   children: Date,

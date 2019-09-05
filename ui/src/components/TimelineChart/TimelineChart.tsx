@@ -7,7 +7,7 @@ import TimeAxis from './TimeAxis';
 
 import { Timeline } from 'timelineEvent';
 
-import './TimelineChart.css';
+import './TimelineChart.scss';
 
 export const dateColumnWidth = 100;
 export const timelineHeight = 30;

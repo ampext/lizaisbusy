@@ -4,7 +4,7 @@ import { useRect } from '@reach/rect';
 import TimelineChart from './TimelineChart';
 import { Timeline } from '../timelineEvent';
 
-import './TimelineView.css';
+import './TimelineView.scss';
 
 interface Props {
   data: ReadonlyArray<Timeline>,

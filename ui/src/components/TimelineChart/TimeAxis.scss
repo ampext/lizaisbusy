@@ -1,0 +1,22 @@
+.time-axis {
+  display: flex;
+  box-sizing: border-box;
+  border-bottom: 1px solid var(--axis-color);
+
+  &__item {
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+    flex-grow: 1;
+    padding-left: 5px;
+
+    &:not(:first-child) {
+      border-left: 1px solid var(--axis-tick-color);
+    }
+  }
+
+  &__label {
+    font-size: 10px;
+    color: var(--label-color);
+  }
+}
