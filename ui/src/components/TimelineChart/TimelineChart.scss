@@ -18,12 +18,6 @@
   &__time-axis {
     flex-grow: 1;
   }
-
-  &__graph {
-    flex-grow: 0;
-    padding: 5px 0;
-    line-height: 0;
-  }
 }
 
 .timeline-chart-row {
@@ -49,5 +43,11 @@
     box-sizing: border-box;
     flex-shrink: 0;
     border-right: 1px solid var(--grid-color);
+  }
+
+  &__graph {
+    flex-grow: 0;
+    padding: 5px 0;
+    line-height: 0;
   }
 }
