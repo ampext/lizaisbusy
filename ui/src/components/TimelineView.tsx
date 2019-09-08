@@ -5,7 +5,8 @@ import TimelineChart from './TimelineChart';
 import TimelineViewHeader from './TimelineViewHeader';
 import ThemeSwitch from './ThemeSwitch';
 
-import { Timeline } from '../timelineEvent';
+import { Timeline } from 'timelineEvent';
+import useDarkTheme from 'useDarkTheme';
 
 import './TimelineView.scss';
 
@@ -19,6 +20,9 @@ function TimelineView(props: Props) {
   } = props;
 
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
+
+  useDarkTheme(theme === 'dark');
+
   const ref = useRef();
   const rect = useRect(ref);
 
