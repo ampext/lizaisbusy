@@ -1,4 +1,10 @@
 .timeline-view {
   width: 100%;
   max-width: 800px;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 }

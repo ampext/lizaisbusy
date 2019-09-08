@@ -1,8 +1,10 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useRect } from '@reach/rect';
 
 import TimelineChart from './TimelineChart';
 import TimelineViewHeader from './TimelineViewHeader';
+import ThemeSwitch from './ThemeSwitch';
+
 import { Timeline } from '../timelineEvent';
 
 import './TimelineView.scss';
@@ -16,6 +18,7 @@ function TimelineView(props: Props) {
     data = [],
   } = props;
 
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const ref = useRef();
   const rect = useRect(ref);
 
@@ -23,7 +26,10 @@ function TimelineView(props: Props) {
 
   return (
     <div className="timeline-view" ref={ref}>
-      { startDate && endDate && <TimelineViewHeader startDate={startDate} endDate={endDate} /> }
+      <div className="timeline-view__header">
+        { startDate && endDate && <TimelineViewHeader startDate={startDate} endDate={endDate} /> }
+        <ThemeSwitch theme={theme} onChange={setTheme} />
+      </div>
       { rect && <TimelineChart width={rect.width} data={data} /> }
     </div>
   );
