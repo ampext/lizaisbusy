@@ -1,10 +1,10 @@
 import React from 'react';
-import { scaleLinear } from 'd3-scale';
 
 import TimelineDate from './TimelineDate';
 import DayTimeline from './DayTimeline';
 import TimeAxis from './TimeAxis';
 
+import { sortByDate } from 'dateHelpers';
 import { Timeline } from 'timelineEvent';
 
 import './TimelineChart.scss';
@@ -21,7 +21,7 @@ interface Props {
 function TimelineChart(props: Props) {
   const {
     width,
-    data = [],
+    data,
   } = props;
 
   const timelineWidth = width - dateColumnWidth - 2 /* borders */;
@@ -36,7 +36,7 @@ function TimelineChart(props: Props) {
         </div>
       </div>
       <div className="timeline-chart__rows">
-        { data.map((timeline: Timeline, row: number) => (
+        { sortByDate(data).map((timeline: Timeline, row: number) => (
             <div key={`row-${row}`} className="timeline-chart-row">
               <div className="timeline-chart-row__date" style={{ width: dateColumnWidth }}>
                 <TimelineDate>
