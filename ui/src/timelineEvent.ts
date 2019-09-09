@@ -3,6 +3,12 @@ export enum TimelineEventType {
   Service,
 }
 
+export interface ServerTimelineEvent {
+  type: TimelineEventType,
+  startTime: string,
+  endTime: string,
+}
+
 export interface TimelineEvent {
   type: TimelineEventType,
   startTime: Date,

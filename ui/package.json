@@ -31,12 +31,15 @@
     "typescript": "3.6.2",
     "webpack": "4.39.1",
     "webpack-cli": "3.3.6",
+    "copy-webpack-plugin": "5.0.4",
     "webpack-dev-server": "3.7.2",
     "webpack-merge": "4.2.1"
   },
   "scripts": {
-    "build": "webpack --mode=production --config=webpack.config.js",
-    "start": "webpack-dev-server --config=webpack.config.js",
+    "build": "webpack --mode=production --config=webpack/app.config.js",
+    "start": "webpack-dev-server --config=webpack/app.config.js",
+    "build-preview": "webpack --mode=production --config=webpack/preview.config.js",
+    "start-preview": "webpack-dev-server --config=webpack/preview.config.js",
     "test": "jest"
   },
   "jest": {

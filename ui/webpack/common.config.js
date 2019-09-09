@@ -1,13 +1,7 @@
 const path = require('path');
-const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: {
-    'bundle': './src/index'
-  },
-
   output: {
     filename: '[name].[hash:5].js',
   },
@@ -18,13 +12,6 @@ module.exports = {
   },
 
   plugins: [
-    new HtmlWebpackPlugin({
-      title: 'Liza is busy',
-      template: path.join(__dirname, 'public/index.html'),
-    }),
-    new webpack.DefinePlugin({
-      'process.env.API_URL': JSON.stringify(process.env.API_URL || 'http://localhost:8080'),
-    }),
     new MiniCssExtractPlugin({
       filename: 'styles.[hash:5].css',
       ignoreOrder: false,
@@ -39,7 +26,7 @@ module.exports = {
         test: /\.tsx?$/,
         use: 'ts-loader',
         include: [
-          path.resolve(__dirname, 'src'),
+          path.resolve(__dirname, '../src'),
         ]
       },
       {
@@ -55,7 +42,6 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
-              // Prefer `dart-sass`
               implementation: require('sass'),
             },
           },

@@ -1,21 +1,23 @@
 import React from 'react';
 
 import TimelineView from './TimelineView';
-import useFetch from '../useFetch';
-import groupEventsByDay from '../groupEventsByDay';
-import { TimelineEventType } from '../timelineEvent';
+import useFetch from 'useFetch';
+import groupEventsByDay from 'groupEventsByDay';
+import { ServerTimelineEvent } from 'timelineEvent';
+import tranformServerEvent from 'transformServerEvents';
 
-interface Event {
-  type: TimelineEventType,
-  startTime: string,
-  endTime: string,
+type Response = ReadonlyArray<ServerTimelineEvent>;
+
+interface Props {
+  dataUrl?: string,
 }
 
-type Response = ReadonlyArray<Event>;
+function App(props: Props) {
+  const {
+    dataUrl = `${process.env.API_URL}/events?last_days=100`,
+  } = props;
 
-function App() {
-  const url = `${process.env.API_URL}/events?last_days=100`;
-  const [response, loading, error] = useFetch<Response>(url, []);
+  const [response, loading, error] = useFetch<Response>(dataUrl, []);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -26,13 +28,10 @@ function App() {
   }
 
   if (response) {
-    const events = response.map(event => ({
-      ...event,
-      startTime: new Date(event.startTime),
-      endTime: new Date(event.endTime),
-    }));
+    const events = response.map(tranformServerEvent);
+    const data = groupEventsByDay(events);
 
-    return <TimelineView data={groupEventsByDay(events)} />;
+    return <TimelineView data={data} />;
   }
 
   return null;
