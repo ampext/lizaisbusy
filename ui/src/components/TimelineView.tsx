@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { useRect } from '@reach/rect';
 
 import TimelineChart from './TimelineChart';
@@ -6,7 +6,7 @@ import TimelineViewHeader from './TimelineViewHeader';
 import ThemeSwitch from './ThemeSwitch';
 
 import { Timeline } from 'timelineEvent';
-import useDarkTheme from 'useDarkTheme';
+import useDarkMode from 'useDarkMode';
 
 import './TimelineView.scss';
 
@@ -19,10 +19,7 @@ function TimelineView(props: Props) {
     data = [],
   } = props;
 
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
-
-  useDarkTheme(theme === 'dark');
-
+  const [isDark, setDarkMode] = useDarkMode();
   const ref = useRef();
   const rect = useRect(ref);
 
@@ -32,7 +29,7 @@ function TimelineView(props: Props) {
     <div className="timeline-view" ref={ref}>
       <div className="timeline-view__header">
         { startDate && endDate && <TimelineViewHeader startDate={startDate} endDate={endDate} /> }
-        <ThemeSwitch theme={theme} onChange={setTheme} />
+        <ThemeSwitch isDark={isDark} onChange={setDarkMode} />
       </div>
       { rect && <TimelineChart width={rect.width} data={data} /> }
     </div>
