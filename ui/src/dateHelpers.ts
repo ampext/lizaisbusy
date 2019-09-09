@@ -9,5 +9,5 @@ export function endOfDay(date: Date): Date {
 type ReadonlyArrayWithDate = ReadonlyArray<{ readonly date: Date }>;
 
 export function sortByDate(data: ReadonlyArrayWithDate): ReadonlyArrayWithDate {
-  return data.slice().sort((a, b) => a.date.getTime() - b.date.getTime());
+  return data.slice().sort((a, b) => b.date.getTime() - a.date.getTime());
 }
