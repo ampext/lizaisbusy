@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+  - "node"
+cache:
+  directories:
+    - node_modules
+install:
+  - cd ui
+  - yarn install
+script:
+  - yarn build

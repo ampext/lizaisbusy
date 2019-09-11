@@ -12,6 +12,7 @@ module.exports = merge(config, {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Liza is busy [preview]',
+      filename: 'preview.html',
       template: path.join(__dirname, '../public/preview.html'),
     }),
     new CopyWebpackPlugin([
