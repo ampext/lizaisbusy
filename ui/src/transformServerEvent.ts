@@ -1,4 +1,4 @@
-import { ServerTimelineEvent, TimelineEvent } from "timelineEvent";
+import { ServerTimelineEvent, TimelineEvent } from 'timelineEvent';
 
 function tranformServerEvent(event: ServerTimelineEvent): TimelineEvent {
   return {

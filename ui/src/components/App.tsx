@@ -4,7 +4,7 @@ import TimelineView from './TimelineView';
 import useFetch from 'useFetch';
 import groupEventsByDay from 'groupEventsByDay';
 import { ServerTimelineEvent } from 'timelineEvent';
-import tranformServerEvent from 'transformServerEvents';
+import tranformServerEvent from 'transformServerEvent';
 
 type Response = ReadonlyArray<ServerTimelineEvent>;
 
