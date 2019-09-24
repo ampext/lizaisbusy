@@ -14,6 +14,7 @@ module.exports = merge(config, {
       title: 'Liza is busy [preview]',
       filename: 'preview.html',
       template: path.join(__dirname, '../public/preview.html'),
+      hash: true,
     }),
     new CopyWebpackPlugin([
       {

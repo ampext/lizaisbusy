@@ -15,7 +15,6 @@ install-server:
 	cp lizaisbusy $(DESTDIR)/server
 	cp -r ui/dist/* $(DESTDIR)/server/static
 
-
 install-monitor:
 	mkdir -p $(DESTDIR)/monitor
 	cp monitor/app/monitor.js monitor/app/package.json monitor/app/yarn.lock $(DESTDIR)/monitor

@@ -4,7 +4,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   output: {
-    filename: '[name].[hash:5].js',
+    filename: '[name].js',
   },
 
   resolve: {
@@ -15,7 +15,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: 'styles.[hash:5].css',
+      filename: 'styles.css',
       ignoreOrder: false,
     }),
   ],

@@ -13,6 +13,7 @@ module.exports = merge(config, {
     new HtmlWebpackPlugin({
       title: 'Liza is busy',
       template: path.join(__dirname, '../public/index.html'),
+      hash: true,
     }),
     new webpack.DefinePlugin({
       'process.env.API_URL': JSON.stringify(process.env.API_URL || 'http://localhost:8080'),
