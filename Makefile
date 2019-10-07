@@ -2,7 +2,7 @@
 
 build: build-server build-ui
 
-install: install-server install-ui
+install: install-server install-monitor
 
 build-server:
 	go get && go build
