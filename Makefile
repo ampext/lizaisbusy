@@ -8,7 +8,7 @@ build-server:
 	go get && go build
 
 build-ui:
-	cd ui && yarn && yarn build
+	API_URL="" && cd ui && yarn && yarn build
 
 install-server:
 	mkdir -p $(DESTDIR)/server/static
