@@ -30,33 +30,42 @@ func main() {
 
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("/events", func(w http.ResponseWriter, r *http.Request) {
-		queryParams := r.URL.Query()
-
-		lastDays, err := strconv.Atoi(queryParams.Get("last_days"))
-		if err != nil || lastDays <= 0 {
-			http.Error(w, "bad \"lastDays\" query parameter", http.StatusBadRequest)
-			return
-		}
-
-		events, err := monitor.GetEvents(db, lastDays)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
-
-		timelineEvents := timeline.ConvertToTimelineEvents(events)
-
-		result, err := json.Marshal(timelineEvents)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
-
-		w.Header().Set("Content-Type", "application/json")
-		w.Write(result)
-	})
+	mux.Handle("/", http.FileServer(http.Dir("static")))
+	mux.Handle("/events", withDatabase(db, handleEvents))
 
 	handler := cors.Default().Handler(mux)
 	http.ListenAndServe(":8080", handler)
+}
+
+func withDatabase(db *sql.DB, handler func(http.ResponseWriter, *http.Request, *sql.DB)) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		handler(w, r, db)
+	})
+}
+
+func handleEvents(w http.ResponseWriter, r *http.Request, db *sql.DB) {
+	queryParams := r.URL.Query()
+
+	lastDays, err := strconv.Atoi(queryParams.Get("last_days"))
+	if err != nil || lastDays <= 0 {
+		http.Error(w, "bad \"lastDays\" query parameter", http.StatusBadRequest)
+		return
+	}
+
+	events, err := monitor.GetEvents(db, lastDays)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	timelineEvents := timeline.ConvertToTimelineEvents(events)
+
+	result, err := json.Marshal(timelineEvents)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(result)
 }
