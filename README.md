@@ -1,6 +1,8 @@
 # lizaisbusy
 Sometimes Liza is busy  🐾
 
+![Liza is busy (dark theme)](https://raw.githubusercontent.com/ampext/ampext.github.io/master/images/lizaisbusy_dark.png)
+
 [![Build Status](https://travis-ci.com/ampext/lizaisbusy.svg?token=rSJHbNU4TZ5JfqUKCfei&branch=master)](https://travis-ci.com/ampext/lizaisbusy)
 
 ## Install
