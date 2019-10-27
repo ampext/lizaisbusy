@@ -1,11 +1,22 @@
-language: node_js
-node_js:
-  - "node"
-cache:
-  directories:
-    - node_modules
-install:
-  - cd ui
-  - yarn install
-script:
-  - yarn build
+matrix:
+  include:
+    - language: go
+      go:
+        - "1.12"
+      install:
+        - go get
+      script:
+        - go test
+        - go build
+    - language: node_js
+      node_js:
+        - "node"
+      cache:
+        directories:
+        - node_modules
+      install:
+        - cd ui
+        - yarn install
+      script:
+        - yarn test
+        - yarn build
