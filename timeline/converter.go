@@ -32,13 +32,15 @@ func groupMonitorSensorEvents(events []monitor.Event, window int) [][]monitor.Ev
 		return eventGroups
 	}
 
-	if len(events) == 0 {
+	eventsCount := len(events)
+
+	if eventsCount == 0 {
 		return eventGroups
 	}
 
 	startIndex := 0
 
-	for i := 1; i < len(events); i++ {
+	for i := 1; i < eventsCount; i++ {
 		eventTime := events[i].Time
 		prevEventTime := events[i-1].Time
 
@@ -54,6 +56,8 @@ func groupMonitorSensorEvents(events []monitor.Event, window int) [][]monitor.Ev
 			startIndex = i
 		}
 	}
+
+	eventGroups = append(eventGroups, events[startIndex:eventsCount])
 
 	return eventGroups
 }

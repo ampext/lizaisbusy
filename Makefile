@@ -19,3 +19,6 @@ install-monitor:
 	mkdir -p $(DESTDIR)/monitor
 	cp monitor/app/monitor.js monitor/app/package.json monitor/app/yarn.lock $(DESTDIR)/monitor
 	cd $(DESTDIR)/monitor && yarn
+
+test:
+	go test ./...
