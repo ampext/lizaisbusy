@@ -5,11 +5,12 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	"lizaisbusy/monitor"
-	"lizaisbusy/timeline"
 	"log"
 	"net/http"
 	"strconv"
+
+	"github.com/ampext/lizaisbusy/monitor"
+	"github.com/ampext/lizaisbusy/timeline"
 
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/rs/cors"

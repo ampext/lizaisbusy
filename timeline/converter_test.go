@@ -1,10 +1,10 @@
 package timeline
 
 import (
-	"lizaisbusy/monitor"
 	"testing"
 	"time"
 
+	"github.com/ampext/lizaisbusy/monitor"
 	"github.com/stretchr/testify/assert"
 )
 

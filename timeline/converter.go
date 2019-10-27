@@ -2,9 +2,10 @@ package timeline
 
 import (
 	"fmt"
-	"lizaisbusy/monitor"
 	"log"
 	"time"
+
+	"github.com/ampext/lizaisbusy/monitor"
 )
 
 // ConvertToTimelineEvents convers sequence of monitor events to sequence of timeline events
